@@ -1,13 +1,13 @@
 function ConvertHandler() {
   this.getNum = function (input) {
     let result;
-    const resultMatch = input.match(/^(\d+)?(gal|L|mi|km|lbs|kg)$/);
+    const resultMatch = input.match(/^(\d+|\d\/\d)?(gal|L|mi|km|lbs|kg)$/);
     resultMatch[1] ? (result = resultMatch[1]) : (result = 1);
     return result;
   };
 
   this.getUnit = function (input) {
-    const resultMatch = input.match(/^(\d+)?(gal|L|mi|km|lbs|kg)$/);
+    const resultMatch = input.match(/^(\d+|\d\/\d)?(gal|L|mi|km|lbs|kg)$/);
     return resultMatch[2];
   };
 
