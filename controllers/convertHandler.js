@@ -3,6 +3,7 @@ function ConvertHandler() {
     let result;
     const resultMatch = input.match(/^(\d+|\d\/\d)?(gal|L|mi|km|lbs|kg)$/);
     resultMatch[1] ? (result = resultMatch[1]) : (result = 1);
+
     return result;
   };
 
@@ -65,25 +66,32 @@ function ConvertHandler() {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
+    let initialVal = initNum;
+
+    if (initNum.includes("/")) {
+      const res = initNum.split("/");
+      initialVal = res[0] / res[1];
+    }
+
     let result;
     switch (initUnit) {
       case "gal":
-        result = initNum * galToL;
+        result = initialVal * galToL;
         break;
       case "L":
-        result = initNum / galToL;
+        result = initialVal / galToL;
         break;
       case "mi":
-        result = initNum * miToKm;
+        result = initialVal * miToKm;
         break;
       case "km":
-        result = initNum / miToKm;
+        result = initialVal / miToKm;
         break;
       case "lbs":
-        result = initNum * lbsToKg;
+        result = initialVal * lbsToKg;
         break;
       case "kg":
-        result = initNum / lbsToKg;
+        result = initialVal / lbsToKg;
         break;
     }
     return result;
@@ -92,7 +100,7 @@ function ConvertHandler() {
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
     return `${initNum} ${this.spellOutUnit(
       initUnit
-    )} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
+    )} converts to ${returnNum.toFixed(5)} ${this.spellOutUnit(returnUnit)}`;
   };
 }
 
