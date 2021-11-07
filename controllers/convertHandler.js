@@ -1,14 +1,24 @@
 function ConvertHandler() {
+  const regex = /^(\d+|(\d|\d\.\d)\/(\d|\d\.\d)|\d\.\d)?(gal|L|mi|km|lbs|kg)$/;
+
   this.getNum = function (input) {
-    let result;
-    const resultMatch = input.match(/^(\d+|\d\/\d)?(gal|L|mi|km|lbs|kg)$/);
-    resultMatch[1] ? (result = resultMatch[1]) : (result = 1);
+    let result = 1;
+    const resultMatch = input.match(regex);
+
+    if (resultMatch[1]) {
+      if (resultMatch[1].includes("/")) {
+        const res = resultMatch[1].split("/");
+        result = res[0] / res[1];
+      } else {
+        result = resultMatch[1];
+      }
+    }
 
     return result;
   };
 
   this.getUnit = function (input) {
-    const resultMatch = input.match(/^(\d+|\d\/\d)?(gal|L|mi|km|lbs|kg)$/);
+    const resultMatch = input.match(regex);
     return resultMatch[2];
   };
 
@@ -67,11 +77,6 @@ function ConvertHandler() {
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
     let initialVal = initNum;
-
-    if (initNum.includes("/")) {
-      const res = initNum.split("/");
-      initialVal = res[0] / res[1];
-    }
 
     let result;
     switch (initUnit) {
