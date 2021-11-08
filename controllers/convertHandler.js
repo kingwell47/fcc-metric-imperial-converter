@@ -113,7 +113,9 @@ function ConvertHandler() {
   this.getString = (initNum, initUnit, returnNum, returnUnit) => {
     const spellOutInitUnit = this.spellOutUnit(initUnit);
     const spellOutReturnUnit = this.spellOutUnit(returnUnit);
-    return `${initNum} ${spellOutInitUnit} converts to ${returnNum} ${spellOutReturnUnit}`;
+    return `${initNum} ${this.spellOutUnit(
+      initUnit
+    )} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
   };
 }
 
