@@ -19,7 +19,8 @@ function ConvertHandler() {
     const resultMatch = input.match(regex);
     if (!resultMatch) return null;
     const inputUnit = resultMatch[resultMatch.length - 1];
-    if (!inputUnit.match(/(^gal$|^[Ll]$|^mi$|^km$|^lbs$|^kg$)/)) return null;
+    if (!inputUnit.match(/^(gal|[Ll]|mi|km|lbs|kg)$/)) return null;
+    if (inputUnit === "l") return "L";
     return inputUnit;
   };
 
@@ -50,7 +51,7 @@ function ConvertHandler() {
     return result;
   };
 
-  this.spellOutUnit = function (unit) {
+  this.spellOutUnit = (unit) => {
     let result = null;
     switch (unit.toLowerCase()) {
       case "gal":
@@ -109,10 +110,10 @@ function ConvertHandler() {
     return parseFloat(result.toFixed(5));
   };
 
-  this.getString = function (initNum, initUnit, returnNum, returnUnit) {
-    return `${initNum} ${this.spellOutUnit(
-      initUnit
-    )} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
+  this.getString = (initNum, initUnit, returnNum, returnUnit) => {
+    const spellOutInitUnit = this.spellOutUnit(initUnit);
+    const spellOutReturnUnit = this.spellOutUnit(returnUnit);
+    return `${initNum} ${spellOutInitUnit} converts to ${returnNum} ${spellOutReturnUnit}`;
   };
 }
 

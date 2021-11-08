@@ -10,20 +10,24 @@ module.exports = function (app) {
     const { getNum, getUnit, getReturnUnit, spellOutUnit, convert, getString } =
       convertHandler;
 
-    const inputNum = getNum("100kmk");
-    // const inputUnit = getUnit(req.query.input);
+    const inputNum = getNum(req.query.input);
+    const inputUnit = getUnit(req.query.input);
 
-    // if (!inputNum && !inputUnit) return res.json("invalid number and unit");
-    // if (!inputNum) return res.json("invalid number");
-    // if (!inputUnit) return res.json("invalid unit");
+    if (!inputNum && !inputUnit) return res.json("invalid number and unit");
+    if (!inputNum) return res.json("invalid number");
+    if (!inputUnit) return res.json("invalid unit");
 
-    console.log(inputNum);
-    console.log(inputUnit);
-    // console.log(req.query.input);
+    const convertNum = convert(inputNum, inputUnit);
+    const convertUnit = getReturnUnit(inputUnit);
 
-    // const convertNum;
-    // const convertUnit;
+    const stringVal = getString(inputNum, inputUnit, convertNum, convertUnit);
 
-    // res.json({ input: req.query.input });
+    res.json({
+      initNum: inputNum,
+      initUnit: inputUnit,
+      returnNum: convertNum,
+      returnUnit: convertUnit,
+      string: stringVal,
+    });
   });
 };
