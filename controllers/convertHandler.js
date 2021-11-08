@@ -1,10 +1,11 @@
 function ConvertHandler() {
   const regex =
-    /^(\d+|(\d|\d\.\d)\/(\d|\d\.\d)\/?(\d|\d\.\d)?|\d\.\d)?(gal|[Ll]|mi|km|lbs|kg)$/;
+    /^(\d+|(\d|\d\.\d)\/(\d|\d\.\d)\/?(\d|\d\.\d)?|\d\.\d)?([\w]+)$/;
 
   this.getNum = function (input) {
     const resultMatch = input.match(regex);
 
+    if (!resultMatch) return null;
     if (!resultMatch[1]) return 1;
     if (resultMatch[1].includes("/")) {
       const res = resultMatch[1].split("/");
@@ -17,8 +18,9 @@ function ConvertHandler() {
   this.getUnit = function (input) {
     const resultMatch = input.match(regex);
     if (!resultMatch) return null;
-    if (resultMatch[resultMatch.length - 1] === "l") return "L";
-    return resultMatch[resultMatch.length - 1];
+    const inputUnit = resultMatch[resultMatch.length - 1];
+    if (!inputUnit.match(/(^gal$|^[Ll]$|^mi$|^km$|^lbs$|^kg$)/)) return null;
+    return inputUnit;
   };
 
   this.getReturnUnit = function (initUnit) {

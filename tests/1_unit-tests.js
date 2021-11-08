@@ -11,6 +11,7 @@ suite("Unit Tests", function () {
   // convertHandler should correctly read a whole number input.
   test("Whole Number", function () {
     assert.strictEqual(getNum("12km"), 12);
+    assert.strictEqual(getNum("100kmk"), 100);
   });
   // convertHandler should correctly read a decimal number input.
   test("Decimal Number", function () {
@@ -42,7 +43,7 @@ suite("Unit Tests", function () {
     assert.strictEqual(getUnit("100mi"), "mi");
     assert.strictEqual(getUnit("100gal"), "gal");
     assert.strictEqual(getUnit("100L"), "L");
-    assert.strictEqual(getUnit("100l"), "L");
+    assert.strictEqual(getUnit("100l"), "l");
     assert.strictEqual(getUnit("100lbs"), "lbs");
     assert.strictEqual(getUnit("100kg"), "kg");
   });
