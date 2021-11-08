@@ -18,7 +18,7 @@ function ConvertHandler() {
   this.getUnit = function (input) {
     const resultMatch = input.match(regex);
     if (!resultMatch) return null;
-    const inputUnit = resultMatch[resultMatch.length - 1];
+    const inputUnit = resultMatch[resultMatch.length - 1].toLowerCase();
     if (!inputUnit.match(/^(gal|[Ll]|mi|km|lbs|kg)$/)) return null;
     if (inputUnit === "l") return "L";
     return inputUnit;
@@ -111,8 +111,6 @@ function ConvertHandler() {
   };
 
   this.getString = (initNum, initUnit, returnNum, returnUnit) => {
-    const spellOutInitUnit = this.spellOutUnit(initUnit);
-    const spellOutReturnUnit = this.spellOutUnit(returnUnit);
     return `${initNum} ${this.spellOutUnit(
       initUnit
     )} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`;
