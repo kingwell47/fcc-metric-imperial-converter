@@ -29,6 +29,7 @@ suite("Unit Tests", function () {
   // convertHandler should correctly return an error on a double-fraction (i.e. 3/2/3).
   test("Error on double-fraction", function () {
     assert.isNull(getNum("1/5/2km"));
+    assert.isNull(getNum("1//2km"));
   });
   // convertHandler should correctly default to a numerical input of 1 when no numerical input is provided.
   test("Default to 1 if no numerical input", function () {

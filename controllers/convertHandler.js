@@ -1,6 +1,5 @@
 function ConvertHandler() {
-  const regex =
-    /^(\d+|(\d|\d\.\d)\/(\d|\d\.\d)\/?(\d|\d\.\d)?|\d\.\d)?([\w]+)$/;
+  const regex = /^([\d\/\.\s]*)(\D+)$/;
 
   this.getNum = function (input) {
     const resultMatch = input.match(regex);
